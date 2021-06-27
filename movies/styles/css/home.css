@@ -1,0 +1,29 @@
+#site_name{
+    
+    text-align: center;
+    margin-top: 5%
+}
+
+header{
+    /* display: flex; */
+    /* flex-flow:row-reverse; */
+    /* padding: 2%; */
+    background-color: bisque;
+    position:fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 60px;
+    
+}
+
+a{
+    float: right;
+    font-size: 17px;
+    padding: 14px 16px;
+    float: right;
+    display: block;
+    text-decoration: none;
+    /* text-align: center; */
+    margin: auto;
+}
