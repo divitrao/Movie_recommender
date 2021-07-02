@@ -37,10 +37,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     #local APP 
-    'recommend.apps.RecommendConfig'
+    'recommend.apps.RecommendConfig',
+
+    #third party
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
+
+LOGIN_REDIRECT_URL = 'homepage'
+ACCOUNT_LOGOUT_REDIRECT = 'homepage' 
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+'django.contrib.auth.backends.ModelBackend',
+'allauth.account.auth_backends.AuthenticationBackend',
+)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,6 +133,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
