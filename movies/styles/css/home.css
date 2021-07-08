@@ -1,9 +1,14 @@
-#site_name{
-    
-    text-align: center;
-    margin-top: 5%
+/* #site_name{
+    margin-top: 400%;
+} */
+
+body{
+    overflow-y: scroll;
 }
 
+body::-webkit-scrollbar{
+    display: none;
+}
 p{
     font-size: 25px;
     float: left;
@@ -21,10 +26,10 @@ header{
     /* padding: 2%; */
     background-color: bisque;
     position:fixed;
-    top: 0;
-    width: 100%;
+     top: 0; 
+     width: 100%;
     overflow: hidden;
-    height: 60px;
+    height: 60px; 
     
 }
 
@@ -37,4 +42,29 @@ a{
     text-decoration: none;
     /* text-align: center; */
     margin: auto;
+}
+
+#counter{
+    font-size: 40px;
+    margin-right: 8%;
+    margin-top: 35%;
+}
+
+#posters{
+    height: 400px;
+    width: 200px;
+    padding: 3%;
+}
+
+#posters:hover{
+   transform: scale(1.2);
+   transition-duration: 0.4s;
+}
+
+#main_page_poster{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* margin-top: 30px; */
+    background-color: black;
 }
