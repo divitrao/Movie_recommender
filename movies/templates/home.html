@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
@@ -18,7 +19,7 @@
 
 </head>
 
-<style>
+<!-- <style>
     .main_div {
         display: flex;
         flex-direction: column;
@@ -37,6 +38,8 @@
         color: black;
 
 
+
+
     }
 
     .movie_counter {
@@ -49,7 +52,7 @@
         background-size: cover;
         align-items: center;
     }
-</style>
+</style> -->
 
 <body>
 
@@ -57,39 +60,52 @@
             <a href="#">LOGIN</a>
             <a href="#"> SIGN UP</a>
         </header> -->
+
+    <div>
+        <header>
+            {% if user.is_authenticated %}
+            <a href="{% url 'account_logout' %}"> LOGOUT </a>
+            <p class="user_message">Hi {{user.username}}</p>
+
+            {% else %}
+            <a href="{% url 'account_login' %}">LOGIN</a>
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+            <p class="user_message">You are not logged in please sign in </p>
+
+            {% endif %}
+        </header>
+    </div>
+
+
+
     <div class="main_div">
-        <div>
-            <header>
-                {% if user.is_authenticated %}
-                <a href="{% url 'account_logout' %}"> LOGOUT </a>
-                <p class="user_message">Hi {{user.username}}</p>
 
-                {% else %}
-                <a href="{% url 'account_login' %}">LOGIN</a>
-                <a href="{% url 'account_signup' %}">Sign Up</a>
-                <p class="user_message">You are not logged in please sign in </p>
-
-                {% endif %}
-            </header>
+        <div class="bg-image">
+            
         </div>
 
 
 
-        <div class="poster">
+        <div class="bg-image2">
+            <p id="counter">0</p>
 
 
-            <h1 id="site_name">Cinema House <i class="fas fa-film"></i> </h1>
-
-        </div>
-        <div class="movie_counter">
-            <p id="counter"></p>
         </div>
 
         <div id='main_page_poster'>
-            
+
 
         </div>
+
     </div>
+
+    <!-- <div class="container">
+        <div class="bg-image">
+            <h1>HIIIIIIIIIII</h1>
+        </div>
+    </div> -->
+
+    <button type="submit">SEARCH A MOVIE FOR YOU </button>
 
 
     <script src="{% static '/javascripts/home.js'%}" type="text/javascript"></script>

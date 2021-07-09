@@ -1,6 +1,14 @@
 /* #site_name{
-    margin-top: 400%;
+   align-items: center;
+   text-align: center;
 } */
+
+.main_div {
+    display: flex;
+    flex-direction: column;
+    border: 5px solid green;
+    margin-top: 30px;
+}
 
 body{
     overflow-y: scroll;
@@ -9,16 +17,16 @@ body{
 body::-webkit-scrollbar{
     display: none;
 }
-p{
+/* p{
     font-size: 25px;
     float: left;
-    /* margin-left: 30px; */
+    margin-left: 30px;
     padding: 14px 16px;
     text-align: center;
-    /* margin-bottom: 3px; */
+    margin-bottom: 3px;
     display: block;
     margin: auto;
-}
+} */
 
 header{
     /* display: flex; */
@@ -67,4 +75,116 @@ a{
     flex-wrap: wrap;
     /* margin-top: 30px; */
     background-color: black;
+}
+
+/* .poster{
+    max-width: 960px;
+    margin: 0 auto;
+} */
+
+/* @media  (max-width:480px){
+    .poster{
+        background-image: url('/static/images/cinema_mobile.jfif');
+         background-size:contain; 
+    }
+}
+
+@media  (min-width:480px) and (max-width:1024px){
+    .poster{
+        background-image: url('/static/images/cinema_mobile.jfif');
+    }
+}
+
+@media   (min-width:1024px){
+    .poster{
+        background-image: url('/static/images/cinema.jpg');
+    }
+} */
+
+@media only screen and (max-width:1024px){
+    #posters{
+        height: 100px;
+        width: 100px;
+    } 
+
+     /* .poster {
+        max-width: 960px;
+
+    } */
+
+    .poster background-image{
+        width: 100%;
+        padding-top: 66%;
+    }
+
+}
+
+
+/* .container .container2{
+    max-width: 100%;
+    margin: 0 auto;
+    
+} */
+
+/* .bg-image {
+    display: flex;
+    width: 100%;
+    padding-top: 66%;
+    margin: auto;
+    background: url('/static/images/cinema.jpg') no-repeat center;
+    background-size: contain;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black; 
+}
+
+.bg-image2 {
+    display: flex;
+    width: 100%;
+    padding-top: 66%;
+    margin: auto;
+    background: url('/static/images/projector.jpg') no-repeat center;
+    background-size: contain;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+} */
+
+
+.bg-image2 {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin: auto;
+    width: 100%;
+    background: url('/static/images/projector.jpg') no-repeat center;
+    background-size: cover;
+    padding-top: 66%;
+}
+
+.bg-image2 p{
+    /* margin-right: 10px; */
+    font-size: 130px;
+    margin-left: 80%;
+    margin-bottom: 85%;
+    color: black;
+}
+.bg-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    background: url('/static/images/cinema.jpg') no-repeat center;
+    background-size: cover;
+    padding-top: 66%;
+    /* height: 1452px; */
+    
+}
+
+button{
+    width: 100%;
+    height: 40px;
+    align-items: center;
 }

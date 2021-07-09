@@ -2,22 +2,38 @@
 
     // document.getElementById('counter').innerHTML = '32000+ movies'
 
-function task(i){
-    setTimeout(function(){
-        $('#counter').html(String(i)+ '+ movies')
-    },1000)
+// function task(i){
+//     setTimeout(function(){
+//         $('#counter').html(String(i)+ '+ movies')
+//     },2000)
+//     console.log(i)
+// }
+var i = 0 
+$('.bg-image2').mouseenter(function ent(){
+    
+setTimeout(function(){
+    $('#counter').html(String(i)+ '+ movies')
+i+=50
+if(i<32050){
+    ent()
 }
+if(i>32000){
+    i=0
+}
+},0.01)
+})
 
-$(".movie_counter").mouseenter(function(){
-    $('#counter').html('0+ movies')
+// $(".bg-image2").mouseenter(function(){
+//     $('#counter').html('0+ movies')
    
     
-    for(let i = 0;i<=32000;i+=5){
-        task(i)
-       }
+//     for(let i = 0;i<=32000;i+=5){
+//         task(i)
+//         // console.log(i)
+//        }
     
 
-})
+// })
 let for_page=Math.floor(Math.random()*664)
 let for_movie = Math.floor(Math.random()*30)
 
@@ -40,11 +56,11 @@ $.ajax({
             let div_tag = document.createElement('div')
             div_tag.appendChild(img_elem)
             document.getElementById('main_page_poster').appendChild(div_tag)
-            console.log(i)
+            // console.log(i)
         }
         
-        console.log(for_movie)
-        console.log(for_page)
+        // console.log(for_movie)
+        // console.log(for_page)
     },
     error: function(){
         console.log('error in request')
