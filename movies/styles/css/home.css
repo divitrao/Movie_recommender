@@ -187,7 +187,7 @@ a{
 
 .bg-image2::after{
     content: '';
-    position:absolute;
+    /* position:absolute; */
     left: 0;
     top: 0;
     width: 100%;

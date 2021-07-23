@@ -48,7 +48,7 @@ header{
 }
 
 .search__button button {
-    width: 100px;
+    width: 200px;
     height: 30px;
     text-align: center;
     border-radius: 10px;
@@ -90,3 +90,33 @@ body {
     background-color: rgba(0,0,0,0.8);
     opacity: 1;
 } */
+
+/* #list_of__pictures{
+    display:flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    justify-content: space-around;
+    flex: 50%;
+} */
+
+#poster{
+    height: 400px;
+    width: 200px;
+    padding: 3%;
+}
+
+table{
+    width: 100%;
+    align-items: center;
+    
+}
+tr{
+    align-items: center;
+}
+
+td{
+    /* padding: 10%; */
+    text-align: center;
+}
+
