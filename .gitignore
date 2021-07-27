@@ -1,3 +1,4 @@
 PipFile
 Pipfile.lock
 .git
+.env
