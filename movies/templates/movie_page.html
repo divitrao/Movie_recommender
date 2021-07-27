@@ -106,18 +106,32 @@
             </button>
         </div>
     </div>
-    
+
     <div id="list_of__pictures">
+        <table>
+            {% for items in links %}
+            <tr>
+                <td>
+                    <img id='poster' src={{items}}>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
 
     </div>
+
     <div>
-    <button class="next__list">click me </button>
+        <form action="next_list" method="GET">
+            <!-- {% csrf_token %} -->
+            <button class="next__list" type="submit">click me </button>
+        </form>
+
     </div>
     <!-- <div>
         <h1 i='1' onmouseover="dikladariya(this)">test</h1>
     </div> -->
     <!-- <script src="{% static '/javascripts/config.js'%}" type="module"></script> -->
-    <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script>
+    <!-- <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script> -->
 </body>
 
 </html>

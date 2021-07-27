@@ -17,8 +17,8 @@
 // const kk = require('./config')
 // console.log(kk.tmdb_api)
 
-const pass = require('./config')
-console.log(pass)
+// const pass = require('./config')
+// console.log(pass)
 
 // console.log(API_token.tmdb_api)
     $.ajax({

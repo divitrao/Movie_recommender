@@ -81,7 +81,7 @@
     <div class="main_div">
 
         <div class="bg-image">
-            
+
         </div>
 
 
@@ -94,7 +94,11 @@
 
         <div id='main_page_poster'>
 
-
+            {% for item_value in links %}
+            <div>
+                <img id='posters' alt="poster" src={{item_value}}>
+            </div>
+            {% endfor %}
         </div>
 
     </div>
@@ -104,10 +108,10 @@
             <h1>HIIIIIIIIIII</h1>
         </div>
     </div> -->
-    <h1>{{testts}}</h1>
 
-    <a href="{% url 'Movie_page' %}"><button type="submit" >SEARCH A MOVIE FOR YOU </button></a>
-    
+
+    <a href="{% url 'Movie_page' %}"><button type="submit">SEARCH A MOVIE FOR YOU </button></a>
+
 
 
     <script src="{% static '/javascripts/home.js'%}" type="text/javascript"></script>
