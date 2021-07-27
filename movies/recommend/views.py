@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from decouple import config
+import requests
 # import requests
 
 # Create your views here.
@@ -15,6 +17,7 @@ class HomePage(TemplateView):
     # # print(json.dumps(info,indent=4))
     # print(info['data']['movies'][0])
     template_name = 'home.html'
+    extra_context = {'testts':config('youtube_api')}
 
 class Movie_page(TemplateView):
     template_name = 'movie_page.html'
