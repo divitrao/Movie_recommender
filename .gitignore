@@ -2,3 +2,4 @@ PipFile
 Pipfile.lock
 .git
 .env
+data.ipynb
