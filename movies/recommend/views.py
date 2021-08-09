@@ -12,7 +12,7 @@ import random
 #https://www.imdb.com/feature/genre/
 
 from django.views.generic import TemplateView
-#https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=devdas_trailerr&key=AIzaSyAPVtYyhX9NRJwEqoXAnslhsQRZUXI5nUU
+#https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=devdas_trailerr&key=pppppppp
 
 
 def poster(number,page_2 = False):
