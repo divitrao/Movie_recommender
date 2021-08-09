@@ -108,11 +108,14 @@
     </div>
 
     <div id="list_of__pictures">
-        <table>
-            {% for items in links %}
-            <tr>
+        <table  id="table_row">
+            {% for item1, item2 in links %}
+            <tr id="table_rows">
                 <td>
-                    <img id='poster' src={{items}}>
+                    <img class='poster' src={{item1}}>
+                </td>
+                <td>
+                    <img class='poster' src={{item2}}>
                 </td>
             </tr>
             {% endfor %}
@@ -121,17 +124,22 @@
     </div>
 
     <div>
-        <form action="next_list" method="GET">
+        <!-- <form  method="POST" id="task_form"> -->
             <!-- {% csrf_token %} -->
-            <button class="next__list" type="submit">click me </button>
-        </form>
+            <button id="next__list"  value="1" name="page" >click me </button>
+        <!-- </form> -->
 
     </div>
-    <!-- <div>
-        <h1 i='1' onmouseover="dikladariya(this)">test</h1>
-    </div> -->
-    <!-- <script src="{% static '/javascripts/config.js'%}" type="module"></script> -->
-    <!-- <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script> -->
+  
+    <script src="{% static '/javascripts/config.js'%}" type="text/javascript"></script>
+    <script>
+        var token = config.tmdb_api;
+        console.log('my token ',token)
+        const data = JSON.parse(("{{data|escapejs}}"))
+        // console.log(data)
+    </script>
+    
+    <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script>
 </body>
 
 </html>
