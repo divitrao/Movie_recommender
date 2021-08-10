@@ -107,8 +107,16 @@
         </div>
     </div>
 
+    <div id="button_1">
+    
+        <button id="previous__list" value="1" name="page"> Previous Page </button>
+        <button id="next__list" value="1" name="page">Next Page </button>
+        <input type="number" max="500" min="1" id="page_number" placeholder="max 500">
+        <button id="by_page">search by page</button>
+    
+    </div>
     <div id="list_of__pictures">
-        <table  id="table_row">
+        <table id="table_row">
             {% for item1, item2 in links %}
             <tr id="table_rows">
                 <td>
@@ -123,22 +131,22 @@
 
     </div>
 
-    <div>
-        <!-- <form  method="POST" id="task_form"> -->
-            <!-- {% csrf_token %} -->
-            <button id="next__list"  value="1" name="page" >click me </button>
-        <!-- </form> -->
-
+    <div id="button_2">
+    
+        <button id="bottom_previous__list" value="1" name="page"> Previous Page </button>
+        <button id="bottom_next__list" value="1" name="page">Next Page </button>
+        <input type="number" max="500" min="1" id="page_numbero" placeholder="max 500">
+        <button id="bottom_by_page">search by page</button>
+    
     </div>
-  
+
     <script src="{% static '/javascripts/config.js'%}" type="text/javascript"></script>
     <script>
-        var token = config.tmdb_api;
-        console.log('my token ',token)
+
         const data = JSON.parse(("{{data|escapejs}}"))
-        // console.log(data)
+
     </script>
-    
+
     <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script>
 </body>
 

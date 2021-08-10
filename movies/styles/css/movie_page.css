@@ -133,3 +133,20 @@ a{
     text-align: center;
     color: white;
 }
+#button_1,#button_2{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#next__list, #previous__list,#bottom_previous__list,#bottom_next__list{
+
+    width: 200px;
+    height: 40px;
+    text-align: center;
+}
+
+#page_number,#page_numbero{
+    width: 70px;
+    /* margin-top: 30px; */
+}
