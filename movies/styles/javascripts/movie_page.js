@@ -1,60 +1,93 @@
+let obj = new Date()
+current_year = obj.getFullYear()
+let sel_ele = document.getElementById('years')
+for(i=1930;i<=current_year;i+=1){   
+    let opt = document.createElement('option')
+    opt.text = i
+    opt.value = i
+    sel_ele.appendChild(opt)
+
+}
 
 
-
-// console.log('hemlo')
 let max_pages = (data['total_pages']) // i'm getting this data from views.py  and i'm collecting it on html by jinja method and passign to this JS file
 var token = config.tmdb_api;
 // const data = JSON.parse(("{{data|escapejs}}"))
 // console.log(data)
-let page_number = 1
+var page_number = 1
 let base_url_poster = 'https://image.tmdb.org/t/p/original'
 
-function next_page(n){
+function next_page(n,genre,ratings,years){
     // let  offet_top = document.getElementById('button_2').offsetTop
-    if (n>500 || n<1 ){
-        
-        return
-    }
-    // if(n>1){
-    //     document.getElementById('previous__list').disabled = false
-    // }
-
-    // console.log(document.getElementById('table_row'))
-    document.getElementById('page_number').value = String(n)
-    document.getElementById('page_numbero').value = String(n)
-    let height_of_div = document.querySelector('#list_of__pictures').offsetHeight
-    console.log(height_of_div)
-    document.getElementById('table_row').remove()
-    document.getElementById('list_of__pictures').style.height = `${height_of_div}px`
+    
+    
+    
     
     // console.log(token)
     $.ajax({
         type:'GET',
-        url:`https://api.themoviedb.org/4/discover/movie?api_key=${token}&page=${n}`,
+        url:`https://api.themoviedb.org/4/discover/movie?api_key=${token}&page=${n}&with_genres=${genre}&vote_average.gte=${ratings}&year=${years}`,
         dataType: "json",
         success : function(data){
+            let max_pages = (data['total_pages'])
+            console.log('these are ',max_pages)
+            if (n>max_pages ){
+                page_number =max_pages
+                return
+            }
+            if(n<1){
+                page_number = 1
+                return
+            }
+            document.getElementById('page_number').value = String(n)
+            document.getElementById('page_numbero').value = String(n)
+            let height_of_div = document.querySelector('#list_of__pictures').offsetHeight
+            // console.log(height_of_div)
+            document.getElementById('table_row').remove()
+            document.getElementById('list_of__pictures').style.height = `${height_of_div}px`
             data = data['results']
             let new_table = document.createElement('table')
             new_table.id = 'table_row'
-            console.log(data[0]['poster_path'])
+            console.log(data)
             document.getElementById('list_of__pictures').appendChild(new_table)
             // document.getElementById('button_2').offsetTop = `${offet_top}px`
             for(i=0;i<data.length;i=i+2){
-                let new_row = document.createElement('tr')
-                new_row.id = 'table_rows'
-                let new_td_1 = document.createElement('td')
-                let new_img_1 = document.createElement('img')
-                new_img_1.className = 'poster'
-                new_img_1.src = base_url_poster + data[i]['poster_path']
-                new_td_1.appendChild(new_img_1)
-                let new_td_2 = document.createElement('td')
-                let new_img_2 = document.createElement('img')
-                new_img_2.className = 'poster'
-                new_img_2.src = base_url_poster + data[i+1]['poster_path']
-                new_td_2.appendChild(new_img_2)
-                new_row.appendChild(new_td_1)
-                new_row.appendChild(new_td_2)
-                new_table.appendChild(new_row)
+                try{
+                    // console.log(i)
+                    // console.log(i+1)
+                    let new_row = document.createElement('tr')
+                    new_row.id = 'table_rows'
+                    let new_td_1 = document.createElement('td')
+                    let new_img_1 = document.createElement('img')
+                    new_img_1.className = 'poster'
+                    new_img_1.src = base_url_poster + data[i]['poster_path']
+                    new_img_1.alt = data[i]['original_title']
+                    new_td_1.appendChild(new_img_1)
+                    new_row.appendChild(new_td_1)
+                    let new_td_2 = document.createElement('td')
+                    let new_img_2 = document.createElement('img')
+                    new_img_2.className = 'poster'
+                    new_img_2.src = base_url_poster + data[i+1]['poster_path']
+                    new_img_2.alt = data[i+1]['original_title']
+                    new_td_2.appendChild(new_img_2)
+                    new_row.appendChild(new_td_2)
+                    new_table.appendChild(new_row)}
+                catch{
+                    let new_row = document.createElement('tr')
+                    new_row.id = 'table_rows'
+                    let new_td_1 = document.createElement('td')
+                    let new_img_1 = document.createElement('img')
+                    new_img_1.className = 'poster'
+                    new_img_1.src = base_url_poster + data[i]['poster_path']
+                    new_img_1.alt = data[i]['original_title']
+                    new_td_1.appendChild(new_img_1)
+                    new_row.appendChild(new_td_1)
+                    new_table.appendChild(new_row)
+                        
+                }
+                // finally{
+                //     new_row.appendChild(new_td_1)
+                // }
 
 
             }
@@ -65,48 +98,34 @@ function next_page(n){
 
 }
 
-// if (page_number==1){
-//     document.getElementById('previous__list').disabled = true
-// }
+
 
 $('#next__list, #bottom_next__list').click(function(){
-    // console.log(page_number)
-    // if (page_number>=1){
-    //     document.getElementById('previous__list').disabled = false
-    // }
-    // if(page_number==max_pages-1){
-    //     document.getElementById('next__list').disabled = true
-    // }
-    next_page(page_number+=1)
+    let genre_id= $('#imdb__genre option:selected').val()
+    let rate= $('.ratings option:selected').val()
+    let year = $('#years option:selected').val()
+    next_page(page_number+=1,genre_id,rate,year)
 }
 )
 $('#previous__list, #bottom_previous__list').click(function(){
-    // console.log(page_number)
-    // if (page_number<=2){
-    //     document.getElementById('previous__list').disabled = true
-    // }
-    // if(page_number<max_pages+1){
-    //     document.getElementById('next__list').disabled = false
-    // }
-    next_page(page_number-=1)
+    let genre_id= $('#imdb__genre option:selected').val()
+    let rate= $('.ratings option:selected').val()
+    let year = $('#years option:selected').val()
+    next_page(page_number-=1,genre_id,rate,year)
 }
 )
 
 $('#by_page , #bottom_by_page').click(function(){
-    console.log(this.id)
+    let genre_id= $('#imdb__genre option:selected').val()
+    let rate= $('.ratings option:selected').val()
+    let year = $('#years option:selected').val()
     if(this.id=='by_page'){
         let page_numbers= parseInt(document.getElementById('page_number').value)
-   page_number = page_numbers
+        console.log(page_numbers,rate,year)
+        page_number = page_numbers
    
-//    if(page_numbers==max_pages){
-//     document.getElementById('next__list').disabled = true
-//    }
-//    if(page_numbers==1){
-//     document.getElementById('previous__list').disabled = true
 
-//     // next_page(page_numbers)
-// }
-next_page(page_numbers)
+next_page(page_numbers,genre_id,rate,year)
 
     }
 
@@ -114,21 +133,32 @@ next_page(page_numbers)
         let page_numbers= parseInt(document.getElementById('page_numbero').value)
         page_number = page_numbers
    
-//         if(page_numbers==max_pages){
-//             document.getElementById('next__list').disabled = true
-//    }
-//    if(page_numbers==1){
-//             document.getElementById('previous__list').disabled = true
 
-//     // next_page(page_numbers)
-// }
-    next_page(page_numbers) 
+    next_page(page_numbers,genre_id,rate,year) 
     }
-    // console.log(this.id)
+   
    
 })
 
 
+
+
+
+$('#search_movie').click(function(){
+    page_number = 1
+    let genre_id= ($('#imdb__genre option:selected').val())
+    let rate= $('.ratings option:selected').val()
+    let year = $('#years option:selected').val()
+    next_page(page_number,genre_id,rate,year) 
+})
+
+
+// $('.genre').change(function(){
+//     // console.log(this.id)
+//     console.log($(this).val())
+//     // console.log($(this).text())
+//     console.log($('#imdb__genre option:selected').text())
+// })
 
 
 

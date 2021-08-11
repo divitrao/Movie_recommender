@@ -55,10 +55,11 @@ header{
     border: none;
 }
 
-.genre ,.sort__by ,.ratings{
+.genre ,.sort__by ,.ratings,#years{
     width: 130px;
-    height: 20px;
-    font-size: 20px;
+    height: 25px;
+    font-size: 15px;
+    text-align: center;
 }
 
 body {
@@ -139,14 +140,16 @@ a{
     margin-top: 30px;
 }
 
-#next__list, #previous__list,#bottom_previous__list,#bottom_next__list{
+#next__list, #previous__list,#bottom_previous__list,#bottom_next__list,#by_page,#bottom_by_page{
 
     width: 200px;
     height: 40px;
-    text-align: center;
+    
 }
 
 #page_number,#page_numbero{
-    width: 70px;
+    /* width: 70px; */
+    height: 30px;
+    text-align: center;
     /* margin-top: 30px; */
 }
