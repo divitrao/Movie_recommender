@@ -16,21 +16,24 @@ var token = config.tmdb_api;
 // console.log(data)
 var page_number = 1
 let base_url_poster = 'https://image.tmdb.org/t/p/original'
-
-function next_page(n,genre,ratings,years){
-    // let  offet_top = document.getElementById('button_2').offsetTop
-    
-    
-    
-    
-    // console.log(token)
+let my_url
+function next_page(n,genre,ratings,years,search){
+   if(search==''){
+       my_url = `https://api.themoviedb.org/4/discover/movie?api_key=${token}&page=${n}&with_genres=${genre}&vote_average.gte=${ratings}&year=${years}`
+   }
+   else{
+       
+       my_url = `https://api.themoviedb.org/3/search/movie?api_key=${token}&language=en-US&query=${search}&include_adult=true`
+       
+   }
     $.ajax({
         type:'GET',
-        url:`https://api.themoviedb.org/4/discover/movie?api_key=${token}&page=${n}&with_genres=${genre}&vote_average.gte=${ratings}&year=${years}`,
+        url: my_url,
         dataType: "json",
         success : function(data){
             let max_pages = (data['total_pages'])
             console.log('these are ',max_pages)
+            console.log(my_url)
             if (n>max_pages ){
                 page_number =max_pages
                 return
@@ -42,7 +45,7 @@ function next_page(n,genre,ratings,years){
             document.getElementById('page_number').value = String(n)
             document.getElementById('page_numbero').value = String(n)
             let height_of_div = document.querySelector('#list_of__pictures').offsetHeight
-            // console.log(height_of_div)
+            
             document.getElementById('table_row').remove()
             document.getElementById('list_of__pictures').style.height = `${height_of_div}px`
             data = data['results']
@@ -50,11 +53,10 @@ function next_page(n,genre,ratings,years){
             new_table.id = 'table_row'
             console.log(data)
             document.getElementById('list_of__pictures').appendChild(new_table)
-            // document.getElementById('button_2').offsetTop = `${offet_top}px`
+           
             for(i=0;i<data.length;i=i+2){
                 try{
-                    // console.log(i)
-                    // console.log(i+1)
+                    
                     let new_row = document.createElement('tr')
                     new_row.id = 'table_rows'
                     let new_td_1 = document.createElement('td')
@@ -85,9 +87,7 @@ function next_page(n,genre,ratings,years){
                     new_table.appendChild(new_row)
                         
                 }
-                // finally{
-                //     new_row.appendChild(new_td_1)
-                // }
+                
 
 
             }
@@ -104,14 +104,16 @@ $('#next__list, #bottom_next__list').click(function(){
     let genre_id= $('#imdb__genre option:selected').val()
     let rate= $('.ratings option:selected').val()
     let year = $('#years option:selected').val()
-    next_page(page_number+=1,genre_id,rate,year)
+    let search_query =  $('#specific_movie').val()
+    next_page(page_number+=1,genre_id,rate,year,search_query)
 }
 )
 $('#previous__list, #bottom_previous__list').click(function(){
     let genre_id= $('#imdb__genre option:selected').val()
     let rate= $('.ratings option:selected').val()
     let year = $('#years option:selected').val()
-    next_page(page_number-=1,genre_id,rate,year)
+    let search_query =  $('#specific_movie').val()
+    next_page(page_number-=1,genre_id,rate,year,search_query)
 }
 )
 
@@ -119,13 +121,14 @@ $('#by_page , #bottom_by_page').click(function(){
     let genre_id= $('#imdb__genre option:selected').val()
     let rate= $('.ratings option:selected').val()
     let year = $('#years option:selected').val()
+    let search_query =  $('#specific_movie').val()
     if(this.id=='by_page'){
         let page_numbers= parseInt(document.getElementById('page_number').value)
         console.log(page_numbers,rate,year)
         page_number = page_numbers
    
 
-next_page(page_numbers,genre_id,rate,year)
+next_page(page_numbers,genre_id,rate,year,search_query)
 
     }
 
@@ -134,7 +137,7 @@ next_page(page_numbers,genre_id,rate,year)
         page_number = page_numbers
    
 
-    next_page(page_numbers,genre_id,rate,year) 
+    next_page(page_numbers,genre_id,rate,year,search_query) 
     }
    
    
@@ -146,10 +149,31 @@ next_page(page_numbers,genre_id,rate,year)
 
 $('#search_movie').click(function(){
     page_number = 1
-    let genre_id= ($('#imdb__genre option:selected').val())
-    let rate= $('.ratings option:selected').val()
-    let year = $('#years option:selected').val()
-    next_page(page_number,genre_id,rate,year) 
+    
+        
+        let genre_id= ($('#imdb__genre option:selected').val())
+        let rate= $('.ratings option:selected').val()
+        let year = $('#years option:selected').val()
+        let search_query =  $('#specific_movie').val()
+        next_page(page_number,genre_id,rate,year,search_query)
+        // $.ajax({
+        //     type: 'GET',
+        //     url : `https://api.themoviedb.org/3/search/movie?api_key=${token}&language=en-US&query=${$('#specific_movie').val()}&include_adult=true`,
+        //     dataType: 'json',
+        //     success: function(data){
+        //          data = data['results']
+        //             console.log(data)
+
+        //     },
+
+
+        // })
+
+    
+   
+        
+    
+     
 })
 
 
