@@ -9,8 +9,37 @@ for(i=1930;i<=current_year;i+=1){
 
 }
 
+// console.log(document.getElementsByTagName('figcaption')[0])
+// for(j=0;j<document.getElementsByTagName('figcaption').length;j++){
+//     c = document.getElementsByTagName('figcaption')[j]
+//     c.style.display = 'none'
+// }
+// document.getElementsByTagName('figcaption').style.display = 'none'
 
 let max_pages = (data['total_pages']) // i'm getting this data from views.py  and i'm collecting it on html by jinja method and passign to this JS file
+document.getElementById('current_page').innerHTML = `page 1 of ${max_pages}`
+// console.log(data['results'])
+$("img").mouseover(function(){
+    // console.log(data['results'][parseInt(this.id)]['original_title'])
+    // console.log(data['results'][parseInt(this.id)]['vote_average'])
+    console.log(document.getElementById(this.id))
+    document.getElementById(this.id).style.transitionDuration = "0.6s"
+    document.getElementById(this.id).style.opacity = 0.2
+    // console.log(document.getElementById(this.id).childNodes)
+    // console.log(document.getElementById(`fig_caption${this.id}`))
+    document.getElementById(`fig_caption${this.id}`).style.display = "block"
+    
+})
+$("img").mouseout(function(){
+    // console.log(data['results'][parseInt(this.id)]['original_title'])
+    // console.log(data['results'][parseInt(this.id)]['vote_average'])
+    // console.log(document.getElementById(this.id))
+    document.getElementById(this.id).style.transitionDuration = "0.6s"
+    document.getElementById(this.id).style.opacity = 1
+    document.getElementById(`fig_caption${this.id}`).style.display = "none"
+})
+
+
 var token = config.tmdb_api;
 // const data = JSON.parse(("{{data|escapejs}}"))
 // console.log(data)
@@ -42,10 +71,10 @@ function next_page(n,genre,ratings,years,search){
                 page_number = 1
                 return
             }
-            document.getElementById('page_number').value = String(n)
+            document.getElementById('page_number').value =  String(n)
             document.getElementById('page_numbero').value = String(n)
+            document.getElementById('current_page').innerHTML = `page ${String(n)} of ${max_pages}`
             let height_of_div = document.querySelector('#list_of__pictures').offsetHeight
-            
             document.getElementById('table_row').remove()
             document.getElementById('list_of__pictures').style.height = `${height_of_div}px`
             data = data['results']
@@ -60,29 +89,84 @@ function next_page(n,genre,ratings,years,search){
                     let new_row = document.createElement('tr')
                     new_row.id = 'table_rows'
                     let new_td_1 = document.createElement('td')
+                    let fig_1 = document.createElement('figure')
                     let new_img_1 = document.createElement('img')
                     new_img_1.className = 'poster'
                     new_img_1.src = base_url_poster + data[i]['poster_path']
                     new_img_1.alt = data[i]['original_title']
-                    new_td_1.appendChild(new_img_1)
+                    new_img_1.id = i
+                    let a_tag_1 = document.createElement('a')
+                    a_tag_1.href = `/movie_info/${data[i]['id']}`
+                    let div_1 = document.createElement('div')
+                    div_1.id = `fig_caption${i}`
+                    div_1.style.display = 'none'
+                    let fig_cap_1 = document.createElement('figcaption')
+                    let fig_cap_1_text = document.createElement('h4')
+                    fig_cap_1_text.innerHTML =`IMDB : ${data[i]['vote_average']}`
+                    let fig_cap_1_text_1 = document.createElement('h4')
+                    fig_cap_1_text_1.innerHTML = data[i]['original_title']
+                    fig_cap_1.appendChild(fig_cap_1_text)
+                    fig_cap_1.appendChild(fig_cap_1_text_1)
+                    div_1.appendChild(fig_cap_1)
+                    a_tag_1.appendChild(new_img_1)
+                    fig_1.appendChild(a_tag_1)
+                    fig_1.appendChild(div_1)
+                    new_td_1.appendChild(fig_1)
                     new_row.appendChild(new_td_1)
+
                     let new_td_2 = document.createElement('td')
+                    let fig_2 = document.createElement('figure')
                     let new_img_2 = document.createElement('img')
                     new_img_2.className = 'poster'
                     new_img_2.src = base_url_poster + data[i+1]['poster_path']
                     new_img_2.alt = data[i+1]['original_title']
-                    new_td_2.appendChild(new_img_2)
+                    new_img_2.id = i+1
+                    let a_tag_2 = document.createElement('a')
+                    a_tag_2.href = `/movie_info/${data[i+1]['id']}`
+                    let div_2 = document.createElement('div')
+                    div_2.id = `fig_caption${i+1}`
+                    div_2.style.display = 'none'
+                    let fig_cap_2 = document.createElement('figcaption')
+                    let fig_cap_2_text = document.createElement('h4')
+                    fig_cap_2_text.innerHTML =`IMDB : ${data[i+1]['vote_average']}`
+                    let fig_cap_2_text_2 = document.createElement('h4')
+                    fig_cap_2_text_2.innerHTML = data[i+1]['original_title']
+                    fig_cap_2.appendChild(fig_cap_2_text)
+                    fig_cap_2.appendChild(fig_cap_2_text_2)
+                    div_2.appendChild(fig_cap_2)
+                    a_tag_2.appendChild(new_img_2)
+                    fig_2.appendChild(a_tag_2)
+                    fig_2.appendChild(div_2)
+                    new_td_2.appendChild(fig_2)
                     new_row.appendChild(new_td_2)
                     new_table.appendChild(new_row)}
                 catch{
                     let new_row = document.createElement('tr')
                     new_row.id = 'table_rows'
                     let new_td_1 = document.createElement('td')
+                    let fig_1 = document.createElement('figure')
                     let new_img_1 = document.createElement('img')
                     new_img_1.className = 'poster'
                     new_img_1.src = base_url_poster + data[i]['poster_path']
                     new_img_1.alt = data[i]['original_title']
-                    new_td_1.appendChild(new_img_1)
+                    new_img_1.id = i
+                    let a_tag_1 = document.createElement('a')
+                    a_tag_1.href = `/movie_info/${data[i]['id']}`
+                    let div_1 = document.createElement('div')
+                    div_1.id = `fig_caption${i}`
+                    div_1.style.display = 'none'
+                    let fig_cap_1 = document.createElement('figcaption')
+                    let fig_cap_1_text = document.createElement('h4')
+                    fig_cap_1_text.innerHTML =`imdb : ${data[i]['vote_average']}`
+                    let fig_cap_1_text_1 = document.createElement('h4')
+                    fig_cap_1_text_1.innerHTML = data[i]['original_title']
+                    fig_cap_1.appendChild(fig_cap_1_text)
+                    fig_cap_1.appendChild(fig_cap_1_text_1)
+                    div_1.appendChild(fig_cap_1)
+                    a_tag_1.appendChild(new_img_1)
+                    fig_1.appendChild(a_tag_1)
+                    fig_1.appendChild(div_1)
+                    new_td_1.appendChild(fig_1)
                     new_row.appendChild(new_td_1)
                     new_table.appendChild(new_row)
                         
@@ -91,6 +175,26 @@ function next_page(n,genre,ratings,years,search){
 
 
             }
+            $("img").mouseover(function(){
+                // console.log(data['results'][parseInt(this.id)]['original_title'])
+                // console.log(data['results'][parseInt(this.id)]['vote_average'])
+                // console.log(document.getElementById(this.id))
+                document.getElementById(this.id).style.transitionDuration = "0.6s";
+                document.getElementById(this.id).style.opacity = 0.2
+                // console.log(document.getElementById(this.id).childNodes)
+                // console.log(document.getElementById(`fig_caption${this.id}`))
+                document.getElementById(`fig_caption${this.id}`).style.display = "block"
+                
+            })
+            $("img").mouseout(function(){
+                // console.log(data['results'][parseInt(this.id)]['original_title'])
+                // console.log(data['results'][parseInt(this.id)]['vote_average'])
+                // console.log(document.getElementById(this.id))
+                document.getElementById(this.id).style.transitionDuration = "0.6s";
+                document.getElementById(this.id).style.opacity = 1
+                document.getElementById(`fig_caption${this.id}`).style.display = "none"
+            })
+            
             
         }
 
@@ -156,27 +260,10 @@ $('#search_movie').click(function(){
         let year = $('#years option:selected').val()
         let search_query =  $('#specific_movie').val()
         next_page(page_number,genre_id,rate,year,search_query)
-        // $.ajax({
-        //     type: 'GET',
-        //     url : `https://api.themoviedb.org/3/search/movie?api_key=${token}&language=en-US&query=${$('#specific_movie').val()}&include_adult=true`,
-        //     dataType: 'json',
-        //     success: function(data){
-        //          data = data['results']
-        //             console.log(data)
 
-        //     },
-
-
-        // })
+    })
 
     
-   
-        
-    
-     
-})
-
-
 // $('.genre').change(function(){
 //     // console.log(this.id)
 //     console.log($(this).val())

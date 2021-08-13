@@ -131,18 +131,50 @@
         <button id="by_page">search by page</button>
     
     </div>
+    <div id="current_page">
+
+    </div>
     <div id="list_of__pictures">
         <table id="table_row">
-            {% for item1, item2 in links %}
+           
+            {% for item1,id1,id2,item2,alt1,alt2,fig_cap_1,fig_cap_2,imdb_1,imdb_2,movie_id1,movie_id2 in links %}
             <tr id="table_rows">
                 <td>
-                    <img class='poster' src={{item1}}>
+                    <figure>
+                    <a href="/movie_info/{{movie_id1}}" id={{movie_id1}}>
+                    <img class='poster' src={{item1}} id={{id1}} alt={{alt1}}>
+                    </a>
+                    <div id={{fig_cap_1}} hidden>
+                    <figcaption >
+                        <h4>{{imdb_1}}</h4>
+                        <h4>{{alt1}}</h4>
+                        
+                    </figcaption>
+                    </div>
+                    </figure>
+                  
                 </td>
                 <td>
-                    <img class='poster' src={{item2}}>
+                    <figure>
+                    <a href="/movie_info/{{movie_id2}}" id={{movie_id2}}>
+                    <img class='poster' src={{item2}} id={{id2}} alt={{alt2}} >
+                    </a>
+                    <div id={{fig_cap_2}} hidden>
+                    <figcaption >
+                        
+                        <h4>{{imdb_2}}</h4>
+                        <h4>{{alt2}}</h4>
+                        
+                    </figcaption>
+                    </div>
+                    </figure>
+                    
+                    
                 </td>
             </tr>
+            
             {% endfor %}
+            
         </table>
 
     </div>
