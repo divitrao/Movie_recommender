@@ -48,7 +48,7 @@ let base_url_poster = 'https://image.tmdb.org/t/p/original'
 let my_url
 function next_page(n,genre,ratings,years,search){
    if(search==''){
-       my_url = `https://api.themoviedb.org/4/discover/movie?api_key=${token}&page=${n}&with_genres=${genre}&vote_average.gte=${ratings}&year=${years}`
+       my_url = `https://api.themoviedb.org/4/discover/movie?api_key=${token}&language=en-US&page=${n}&with_genres=${genre}&vote_average.gte=${ratings}&year=${years}`
    }
    else{
        
@@ -228,7 +228,7 @@ $('#by_page , #bottom_by_page').click(function(){
     let search_query =  $('#specific_movie').val()
     if(this.id=='by_page'){
         let page_numbers= parseInt(document.getElementById('page_number').value)
-        console.log(page_numbers,rate,year)
+        // console.log(page_numbers,rate,year)
         page_number = page_numbers
    
 

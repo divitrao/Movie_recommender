@@ -67,30 +67,38 @@ class Movie_page(TemplateView):
     # print(poster_linkss)
     extra_context = {'links':poster_linkss,'data':json_data}
 
+# class specific_movie_info(TemplateView):
 def specific_movie_info(request,pk):
-    base_url_poster = 'https://image.tmdb.org/t/p/original'
-    urls = f'https://api.themoviedb.org/3/movie/{pk}?language=en-US&api_key={config("tmdb_api")}'
-    res = requests.get(urls)
-    data = (res.json())
-    # print('olalalla',data['backdrop_path'])
-    #
-    if data['backdrop_path'] == None:
-        back_drop = 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80'
-    else:
-        back_drop = base_url_poster+data['backdrop_path']
-    if data['poster_path'] == None:
-        poster = 'https://images.unsplash.com/photo-1604975701397-6365ccbd028a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Y2luZW1hfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-    else:
-        poster = base_url_poster + data['poster_path']
-    title = data['title']
-    overiew = data['overview']
-    search_query =data['title'] + ' trailer'
-    youtube_link = f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q={search_query}&key={config("youtube_api")}'
-    res_youtube_id = requests.get(youtube_link)
-    youtube_data = res_youtube_id.json()
-    link = 'https://www.youtube.com/embed/'+ youtube_data['items'][0]['id']['videoId']
-    print(link)
-    return render(request,'movies_info.html',{'back_drop':back_drop,'poster':poster,'title':title,'overview':overiew,'link':link})
+        base_url_poster = 'https://image.tmdb.org/t/p/original'
+        urls = f'https://api.themoviedb.org/3/movie/{pk}?language=en-US&api_key={config("tmdb_api")}'
+        res = requests.get(urls)
+        data = (res.json())
+        if data['backdrop_path'] == None:
+            back_drop = 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80'
+        else:
+            back_drop = base_url_poster+data['backdrop_path']
+        if data['poster_path'] == None:
+            poster = 'https://images.unsplash.com/photo-1604975701397-6365ccbd028a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Y2luZW1hfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+        else:
+            poster = base_url_poster + data['poster_path']
+        title = data['title']
+        overiew = data['overview']
+        rate = data['vote_average']
+        genres = data['genres']
+        genres_type = []
+        for gens in genres:
+                genres_type.append(gens['name'])
+        print(genres_type)
+        # search_query =data['title'] + ' trailer'
+        # youtube_link = f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q={search_query}&key={config("youtube_api")}'
+        # res_youtube_id = requests.get(youtube_link)
+        # youtube_data = res_youtube_id.json()
+        link = 'https://www.youtube.com/embed/oWzdgBNfhQU' #+ youtube_data['items'][0]['id']['videoId']
+        # print(link)
+        # template_name = 'movies_info.html'
+        # extra_context = {'links': poster_links}
+        return render(request,'movies_info.html',{'back_drop':back_drop,'poster':poster,'title':title,'overview':overiew,'link':link,'rate':rate,'genres':genres_type})
+    # template_name = 'movies_info.html'
     
     
     

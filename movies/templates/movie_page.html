@@ -5,12 +5,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+        rel="stylesheet">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
@@ -26,6 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div class="search__center">
         <header>
@@ -36,11 +39,7 @@
             <div class="search__movie">
                 <input placeholder="search" id="specific_movie" type="text" value="">
             </div>
-            <!-- <div class="search__button">
-                <button>
-                    Search
-                </button>
-            </div> -->
+            
         </div>
         <div class="specific__search">
 
@@ -75,20 +74,7 @@
                     <option value="37">Western</option>
                 </select>
             </div>
-            <!-- <div>
-                <div id="heading">
-                    Sort By
-                </div>
-                <select class="sort__by">
-                    <option hidden value=""></option>
-                    <option value="title">Title</option>
-                    <option value="rating">Ratings</option>
-                    <option value="peers">PEERS</option>
-                    <option value="seeds">SEEDS</option>
-                    <option value="year">Year</option>
-                    <option value="date_added">Date Added </option>
-                </select>
-            </div> -->
+
             <div>
                 <div id="heading">
                     Sort by Ratings
@@ -124,70 +110,70 @@
     </div>
 
     <div id="button_1">
-    
+
         <button id="previous__list" value="1" name="page"> Previous Page </button>
         <button id="next__list" value="1" name="page">Next Page </button>
-        <input type="number"  id="page_number" placeholder="max 500">
+        <input type="number" id="page_number" placeholder="max 500">
         <button id="by_page">search by page</button>
-    
+
     </div>
     <div id="current_page">
 
     </div>
     <div id="list_of__pictures">
         <table id="table_row">
-           
+
             {% for item1,id1,id2,item2,alt1,alt2,fig_cap_1,fig_cap_2,imdb_1,imdb_2,movie_id1,movie_id2 in links %}
             <tr id="table_rows">
                 <td>
                     <figure>
-                    <a href="/movie_info/{{movie_id1}}" id={{movie_id1}}>
-                    <img class='poster' src={{item1}} id={{id1}} alt={{alt1}}>
-                    </a>
-                    <div id={{fig_cap_1}} hidden>
-                    <figcaption >
-                        <h4>{{imdb_1}}</h4>
-                        <h4>{{alt1}}</h4>
-                        
-                    </figcaption>
-                    </div>
+                        <a href="/movie_info/{{movie_id1}}" id={{movie_id1}}>
+                            <img class='poster' src={{item1}} id={{id1}} alt={{alt1}}>
+                        </a>
+                        <div id={{fig_cap_1}} hidden>
+                            <figcaption>
+                                <h4>{{imdb_1}}</h4>
+                                <h4>{{alt1}}</h4>
+
+                            </figcaption>
+                        </div>
                     </figure>
-                  
+
                 </td>
                 <td>
                     <figure>
-                    <a href="/movie_info/{{movie_id2}}" id={{movie_id2}}>
-                    <img class='poster' src={{item2}} id={{id2}} alt={{alt2}} >
-                    </a>
-                    <div id={{fig_cap_2}} hidden>
-                    <figcaption >
-                        
-                        <h4>{{imdb_2}}</h4>
-                        <h4>{{alt2}}</h4>
-                        
-                    </figcaption>
-                    </div>
+                        <a href="/movie_info/{{movie_id2}}" id={{movie_id2}}>
+                            <img class='poster' src={{item2}} id={{id2}} alt={{alt2}}>
+                        </a>
+                        <div id={{fig_cap_2}} hidden>
+                            <figcaption>
+
+                                <h4>{{imdb_2}}</h4>
+                                <h4>{{alt2}}</h4>
+
+                            </figcaption>
+                        </div>
                     </figure>
-                    
-                    
+
+
                 </td>
             </tr>
-            
+
             {% endfor %}
-            
+
         </table>
 
     </div>
 
     <div id="button_2">
-    
+
         <button id="bottom_previous__list" value="1" name="page"> Previous Page </button>
         <button id="bottom_next__list" value="1" name="page">Next Page </button>
-        <input type="number"  id="page_numbero" placeholder="max 500">
+        <input type="number" id="page_numbero" placeholder="max 500">
         <button id="bottom_by_page">search by page</button>
-    
+
     </div>
-    
+
     </script>
     <script src="{% static '/javascripts/config.js'%}" type="text/javascript"></script>
     <script>
@@ -197,7 +183,7 @@
     </script>
 
     <script src="{% static '/javascripts/movie_page.js'%}" type="text/javascript"></script>
-    
+
 </body>
 
 </html>
